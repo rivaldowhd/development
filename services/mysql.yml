@@ -1,20 +1,16 @@
   mysql:
-    image: mysql:5.7-debian
+    image: mariadb:10.6
     restart: always
     user: ${HOST_USER_ID}:${HOST_GROUP_ID}
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MAX_ALLOWED_PACKET: 1073741824
     volumes:
-      - ./data/mysql:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
+      - ./data/mysql/initdb.d:/docker-entrypoint-initdb.d
+      - ./containers/mysql/conf.d/:/etc/mysql/conf.d/
     ports:
-      - 3306:3306 # to access mysql with local client
-
-  adminer:
-    image: adminer
-    restart: always
-    environment:
-      ADMINER_DEFAULT_SERVER: mysql
-    ports:
-      - 8080:8080
-    depends_on:
-      - mysql
+      - 33060:3306 # to access mysql with local client

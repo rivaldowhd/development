@@ -7,8 +7,8 @@ ARG HOST_USER_NAME
 ARG HOST_GROUP_ID
 ARG HOST_GROUP_NAME
 
-COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
-COPY spx.ini /usr/local/etc/php/conf.d/spx.ini
+#COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+#COPY spx.ini /usr/local/etc/php/conf.d/spx.ini
 COPY custom.ini /usr/local/etc/php/conf.d/zcustom.ini
 
 RUN groupadd -f -g $HOST_GROUP_ID $HOST_GROUP_NAME && \
