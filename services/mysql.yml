@@ -1,6 +1,7 @@
   mysql:
     build:
       context: containers/mysql
+    user: ${HOST_USER_ID}:${HOST_GROUP_ID}
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -8,7 +9,7 @@
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MAX_ALLOWED_PACKET: 1073741824
     volumes:
-      - mysql_data:/var/lib/mysql
-      - ./data/mysql/initdb.d:/docker-entrypoint-initdb.d
+      - ./data/mysql:/var/lib/mysql
+      - ./data/initdb.d:/docker-entrypoint-initdb.d
     ports:
       - 33060:3306 # to access mysql with local client
