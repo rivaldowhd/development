@@ -10,6 +10,5 @@
     volumes:
       - mysql_data:/var/lib/mysql
       - ./data/mysql/initdb.d:/docker-entrypoint-initdb.d
-      - ./containers/mysql/conf.d/:/etc/mysql/conf.d/
     ports:
       - 33060:3306 # to access mysql with local client
